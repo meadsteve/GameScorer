@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="css/main.css">
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
         <script src="js/vendor/knockout-2.3.0.js"></script>
+        <script src="js/vendor/knockout-extensions.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -27,7 +28,7 @@
                 <input type="text" placeholder="name" data-bind="value: name">
             </li>
         </ul>
-        <input type="text" placeholder="name" data-bind="value: newPlayerName">
+        <input type="text" placeholder="name" data-bind="value: newPlayerName, returnKey:addNew">
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>

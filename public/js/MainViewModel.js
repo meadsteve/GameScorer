@@ -21,6 +21,11 @@ function GameViewModel() {
     ]);
 
 	self.newPlayerName =  ko.observable("");
+
+	self.addNew = function(arg) {
+		self.players.push(new PlayerViewModel(self.newPlayerName()));
+		self.newPlayerName("");
+	};
 }
 
 ko.applyBindings(new GameViewModel());
