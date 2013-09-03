@@ -23,13 +23,15 @@
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 
-        <ul data-bind="foreach: players">
+        <ul class="playerList" data-bind="foreach: players">
             <li>
+                <input type="button" value="x" class="removePlayer" data-bind="click: $parent.removePlayer">
                 <input type="text" placeholder="name" data-bind="value: name">
+                <input type="number" data-bind="value: score">
             </li>
         </ul>
         <input type="text" placeholder="name" data-bind="value: newPlayerName, returnKey:addNew">
-
+        <input type="button" value="Sort" data-bind="click: sortPlayers">
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>

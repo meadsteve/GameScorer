@@ -8,23 +8,43 @@ function PlayerViewModel(name, initialScore) {
 	}
 
     self.name = ko.observable(name);
-    self.initialScore = ko.observable(initialScore);
+    self.score = ko.observable(initialScore);
 }
 
 // Overall viewmodel for this screen. Contains all players
 function GameViewModel() {
     var self = this;
 
-    // Editable data
-    self.players = ko.observableArray([
+	/******************** Properties *****************/
 
-    ]);
+    /* All of the players. */
+    self.players = ko.observableArray([]);
+	/* Next added player. */
+	self.newPlayerName = ko.observable("");
 
-	self.newPlayerName =  ko.observable("");
 
-	self.addNew = function(arg) {
+	/******************** Functions *****************/
+
+	self.addNew = function() {
 		self.players.push(new PlayerViewModel(self.newPlayerName()));
 		self.newPlayerName("");
+	};
+
+	self.removePlayer = function(Player) {
+		self.players.remove(Player);
+	};
+
+	self.sortPlayers = function() {
+		self.players.sort(function(a, b) {
+			var aScore = a.score();
+			var bScore = b.score();
+			if (aScore == bScore) {
+				return 0;
+			}
+			else {
+				return (aScore < bScore) ? 1 : -1;
+			}
+		});
 	};
 }
 
