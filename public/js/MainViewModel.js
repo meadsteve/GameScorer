@@ -9,6 +9,8 @@ function PlayerViewModel(name, initialScore) {
 
     self.name = ko.observable(name);
     self.score = ko.observable(initialScore);
+
+	self.isNew = ko.observable(true);
 }
 
 // Overall viewmodel for this screen. Contains all players
@@ -18,16 +20,28 @@ function GameViewModel() {
 	/******************** Properties *****************/
 
     /* All of the players. */
-    self.players = ko.observableArray([]);
-	/* Next added player. */
-	self.newPlayerName = ko.observable("");
+    self.players = ko.observableArray([new PlayerViewModel()]);
 
+	self.changeLocked = ko.observable(false);
+
+	self.beginGameLabel = ko.observable("Begin Game!");
 
 	/******************** Functions *****************/
 
-	self.addNew = function() {
-		self.players.push(new PlayerViewModel(self.newPlayerName()));
-		self.newPlayerName("");
+	self.addNewTriggeredBy = function(OldPlayer) {
+		var newPlayer = new PlayerViewModel("");
+		self.players.push(newPlayer);
+		if (OldPlayer instanceof PlayerViewModel) {
+			OldPlayer.isNew(false);
+		}
+	};
+
+	self.playerFocus = function(PlayerObj) {
+		if (PlayerObj instanceof PlayerViewModel) {
+			if (PlayerObj.isNew()) {
+				self.addNewTriggeredBy(PlayerObj);
+			}
+		}
 	};
 
 	self.removePlayer = function(Player) {
@@ -45,6 +59,15 @@ function GameViewModel() {
 				return (aScore < bScore) ? 1 : -1;
 			}
 		});
+	};
+
+	self.beginGame = function() {
+		self.changeLocked(true);
+	};
+
+	self.editGame = function() {
+		self.changeLocked(false);
+		self.beginGameLabel("Resume Game!!");
 	};
 }
 
