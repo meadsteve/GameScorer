@@ -1,0 +1,5 @@
+web1: 
+  name: GameScorer
+  document_root: public
+  php_version: 5.4.14
+     
